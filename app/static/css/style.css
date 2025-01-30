@@ -1,0 +1,379 @@
+:root {
+    --primary-color: #e60023;
+    --text-color: #111;
+    --bg-color: #ffffff;
+    --gap: 20px;
+    --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --nav-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --border-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    padding: 1rem 0;
+    background: var(--bg-color);
+    box-shadow: var(--nav-shadow);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-left: auto;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* ========== POST CARDS ========== */
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--gap);
+    padding: 20px;
+}
+
+.post-card {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform 0.3s;
+    break-inside: avoid;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+}
+
+/* .post-card[data-size="small"] { grid-row-end: span 35; }
+.post-card[data-size="medium"] { grid-row-end: span 45; }
+.post-card[data-size="large"] { grid-row-end: span 55; }
+.post-card[data-size="tall"] { grid-row-end: span 55; }
+.post-card[data-size="wide"] { grid-row-end: span 35; } */
+
+.image-wrapper {
+    position: relative;
+    padding-top: 120%;
+    aspect-ratio: 1/1.2;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.post-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Общий контейнер для постов в профиле */
+.profile-posts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Стиль карточки в профиле */
+.profile-post-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    aspect-ratio: 1/1; /* Сохраняем квадратную форму */
+}
+
+/* Фикс для изображения внутри карточки профиля */
+.profile-post-card .post-image {
+    position: relative; /* Меняем absolute на relative */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-card:hover .post-image {
+    transform: scale(1.05);
+}
+
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: var(--bg-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.post-card:hover .image-overlay {
+    opacity: 1;
+}
+
+/* ========== PROFILE ========== */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: filter 0.3s;
+}
+
+.avatar-edit:hover .profile-image {
+    filter: brightness(0.8);
+}
+
+/* ========== FORMS ========== */
+.auth-form, .create-post {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #ad081b;
+}
+
+/* ========== MEDIA QUERIES ========== */
+@media (max-width: 768px) {
+    .post-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-image {
+        margin: 0 auto;
+    }
+}
+
+/* Добавить в CSS */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-image {
+    height: 1.5em; /* Размер как у текста */
+    width: auto;
+}
+
+/* Стили для выпадающего меню */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.profile-menu:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background: #f8f8f8;
+}
+
+/* Стили кнопки */
+.create-post-btn {
+    background: var(--primary-color);
+    color: white !important;
+    padding: 0.75rem 2rem;
+    border-radius: 24px;
+    font-weight: 600;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.create-post-btn:hover {
+    background: #ad081b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230,0,35,0.2);
+}
+
+/* Расположение элементов */
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Дефолтная аватарка */
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+    background: url("../images/davatar.png") no-repeat center/cover; /* Fallback */
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .nav-right {
+        gap: 1rem;
+    }
+    
+    .create-post-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Стили для выпадающего меню */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 1000;
+}
+
+.profile-menu:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background: #f8f8f8;
+}
+
+/* Скрыть/показать элементы для гостей */
+.auth-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Дефолтная аватарка */
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+    cursor: pointer;
+    background: url("../images/davatar.png") no-repeat center/cover;
+}

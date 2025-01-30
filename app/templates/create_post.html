@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="create-post">
+    <h2>Create New Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.title.label }}
+            {{ form.title(class="form-input") }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label }}
+            {{ form.content(class="form-input", rows=5) }}
+        </div>
+        <div class="form-group">
+            {{ form.image.label }}
+            {{ form.image(class="form-input") }}
+        </div>
+        {{ form.submit(class="btn") }}
+    </form>
+</div>
+{% endblock %}

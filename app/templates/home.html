@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="post-grid">
+    {% for post in posts.items %}
+    <div class="post-card" data-size="medium">
+        <a href="{{ url_for('main.post', post_id=post.id) }}">
+            <div class="image-wrapper">
+                <img src="{{ url_for('static', filename='uploads/' + post.image_file) }}" 
+                     alt="{{ post.title }}" 
+                     class="post-image">
+                <div class="image-overlay">
+                    <h3 class="image-title">{{ post.title }}</h3>
+                    <p class="image-author">@{{ post.author.username }}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% if posts.pages > 1 %}
+<div class="pagination">
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=3) %}
+        {% if page_num %}
+            <a href="{{ url_for('main.home', page=page_num) }}" 
+               class="btn {% if page_num == posts.page %}active{% endif %}">
+                {{ page_num }}
+            </a>
+        {% else %}
+            <span class="btn disabled">...</span>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

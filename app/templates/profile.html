@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="profile-header">
+    <img src="{{ url_for('static', filename='uploads/' + user.image_file) }}" alt="{{ user.username }}" class="profile-image">
+    <div>
+        <h1>{{ user.username }}</h1>
+        <p>{{ posts|length }} posts</p>
+    </div>
+</div>
+
+<div class="post-grid">
+    {% for post in posts %}
+    <a href="{{ url_for('main.post', post_id=post.id) }}" class="profile-post-card">
+        <img src="{{ url_for('static', filename='uploads/' + post.image_file) }}" alt="{{ post.title }}" class="post-image">
+        <div class="post-content">
+            <h3>{{ post.title }}</h3>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

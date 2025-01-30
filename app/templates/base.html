@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinFlask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <!-- Логотип -->
+            <a href="/" class="logo">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" 
+                     class="logo-image" 
+                     alt="Logo">
+                PinFlask
+            </a>
+    
+            <!-- Правая часть навбара -->
+            <div class="nav-right">
+                {% if current_user.is_authenticated %}
+                    <!-- Кнопка создания поста -->
+                    <a href="{{ url_for('main.new_post') }}" class="create-post-btn">
+                        Создать пост
+                    </a>
+    
+                    <!-- Блок с аватаркой -->
+                    <div class="profile-menu">
+                        <img src="{{ url_for('static', filename='uploads/' + current_user.image_file) }}" 
+                             class="profile-image" 
+                             alt="Avatar"
+                             onerror="this.src='{{ url_for('static', filename='images/davatar.png') }}'">
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('main.profile', username=current_user.username) }}">Профиль</a>
+                            <a href="{{ url_for('main.logout') }}">Выйти</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Ссылки для гостей -->
+                    <div class="auth-links">
+                        <a href="{{ url_for('main.login') }}">Войти</a>
+                        <a href="{{ url_for('main.register') }}">Регистрация</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new MutationObserver(() => {
+                initImageSizing();
+            });
+        
+            observer.observe(document.body, { childList: true, subtree: true });
+            initImageSizing();
+        
+            function initImageSizing() {
+                document.querySelectorAll('.post-card').forEach(card => {
+                    const img = card.querySelector('img');
+                    if (!img) return;
+        
+                    if (img.complete) {
+                        setSize(card, img);
+                    } else {
+                        img.onload = () => setSize(card, img);
+                    }
+                });
+            }
+        
+            function setSize(card, img) {
+                const ratio = img.naturalWidth / img.naturalHeight;
+                card.dataset.size = ratio < 0.7 ? 'tall' : ratio > 1.3 ? 'wide' : 'medium';
+            }
+        });
+        </script>
+</body>
+</html>

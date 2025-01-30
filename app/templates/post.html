@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .post-image-full {
+        margin-top: -80px;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .navbar {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+
+<div class="post-container">
+    <div class="post-image-wrapper">
+        <img src="{{ url_for('static', filename='uploads/' + post.image_file) }}" 
+             alt="{{ post.title }}" 
+             class="post-image-full">
+    </div>
+    
+    <div class="post-details">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <p class="post-description">{{ post.content }}</p>
+        
+        <div class="post-author">
+            <img src="{{ url_for('static', filename='uploads/' + post.author.image_file) }}" 
+                 alt="{{ post.author.username }}" 
+                 class="author-avatar">
+            <a href="{{ url_for('main.profile', username=post.author.username) }}" 
+               class="author-name">
+                @{{ post.author.username }}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
