@@ -10,6 +10,11 @@ Create and share your own unique, authored content and rate the work of others.
 > [!CAUTION]
 > 🔐 The project is at an early stage of its development, development is underway, at the moment the current version is beta, stable operation is not provided. All features have not been added yet, expect further updates.
 
+![image](https://imgur.com/GSdPMuk.png)
+![image](https://imgur.com/ak7gkPS.png)
+![image](https://imgur.com/nAReXP5.png)
+![image](https://imgur.com/a8mHejr.png)
+
 ### 🖌️Features
 1. 🔰 Easy interface: Fast loading and low server load
 2. ⚙️ User-friendly and optimized interface
